@@ -22,7 +22,10 @@ router.post('/', function(req, res, next) {
     var username = req.body.username;
     var session = driver.session();
     session
-        .run("CREATE (pp:People {username:'pratik'})RETURN pp")
+        .run('CREATE (user:User {email: {email}, username: {username}}) RETURN user',{
+            email: email,
+            username: username
+        })
         .then(function(result){
             result.records.forEach(function(record) {
                 console.log(record._fields);
